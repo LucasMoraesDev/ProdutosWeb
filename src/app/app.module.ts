@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NgxSpinnerModule } from "ngx-spinner";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -12,9 +15,9 @@ import { EdicaoProdutosComponent } from './edicao-produtos/edicao-produtos.compo
 
 //mapeamento das rotas de navegação do projeto
 const routes: Routes = [
-  { path : 'cadastro-produtos', component: CadastroProdutosComponent },
-  { path : 'consulta-produtos', component: ConsultaProdutosComponent },
-  { path : 'edicao-produtos', component: EdicaoProdutosComponent }
+  { path: 'cadastro-produtos', component: CadastroProdutosComponent },
+  { path: 'consulta-produtos', component: ConsultaProdutosComponent },
+  { path: 'edicao-produtos/:id', component: EdicaoProdutosComponent }
 ];
 
 
@@ -28,13 +31,13 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes), //registrando as rotas
-    HttpClientModule //registrando a bilbioteca HTTPCLIENT
+    HttpClientModule, //registrando a bilbioteca HTTPCLIENT
+    BrowserAnimationsModule, //biblioteca para animações
+    NgxSpinnerModule, //biblioteca do componente spinner
+    FormsModule, //formulários reativos
+    ReactiveFormsModule //formulários reativos
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
-
