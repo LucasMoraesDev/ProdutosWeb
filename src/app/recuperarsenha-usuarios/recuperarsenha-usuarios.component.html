@@ -1,31 +1,52 @@
 <div class="m-3">
-    <h5>Recuperação de senha de Usuários</h5>
-    <p>Informe os seus dados para recuperar a sua senha.</p>
-    <hr />
-  
-  
-    <form>
-      <div class="row mb-2">
-        <div class="col-md-4">
-          <label>Email de acesso:</label>
-          <input type="text" class="form-control" />
-        </div>
-      </div>
-  
-  
-      <div class="row mb-2">
-        <div class="col">
-          <input
-            type="submit"
-            class="btn btn-primary"
-            value="Salvar Alterações"
-          />
-        </div>
-      </div>
-    </form>
+  <h5>Recuperação de senha de Usuários</h5>
+  <p>Informe os seus dados para recuperar a sua senha.</p>
+  <hr />
+
+
+  <div class="mb-2 text-success">
+    <strong>{{ mensagem_sucesso }}</strong>
   </div>
-  
-  
-  
-  
-  
+
+
+  <div class="mb-2 text-danger">
+    <strong>{{ mensagem_erro }}</strong>
+  </div>
+
+
+  <form [formGroup]="formRecuperacaoDeSenha" (ngSubmit)="onSubmit()">
+    <div class="row mb-2">
+      <div class="col-md-4">
+        <label>Email de acesso:</label>
+        <input type="text" class="form-control" formControlName="email" />
+        <div
+          *ngIf="form.email.touched && form.email.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.email.errors.required">
+            Por favor, informe o email do usuário.
+          </div>
+          <div *ngIf="form.email.errors.email">
+            Por favor, informe um endereço de email válido.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row mb-2">
+      <div class="col">
+        <input
+          type="submit"
+          class="btn btn-primary"
+          value="Salvar Alterações"
+          [disabled]="!formRecuperacaoDeSenha.valid"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
