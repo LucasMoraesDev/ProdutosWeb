@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationGuard } from './_guards/authentication.guard';
 
 
 import { AppComponent } from './app.component';
@@ -22,11 +23,11 @@ const routes: Routes = [
   { path : '', pathMatch : 'full', redirectTo : 'login-usuarios' }, /* página raiz */
   { path : 'login-usuarios', component: LoginUsuariosComponent },
   { path : 'cadastro-usuarios', component: CadastroUsuariosComponent },
-  { path : 'edicao-usuarios', component: EdicaoUsuariosComponent },
+  { path : 'edicao-usuarios', component: EdicaoUsuariosComponent, canActivate: [AuthenticationGuard] },
   { path : 'recuperarsenha-usuarios', component: RecuperarsenhaUsuariosComponent },
-  { path : 'cadastro-produtos', component: CadastroProdutosComponent },
-  { path : 'consulta-produtos', component: ConsultaProdutosComponent },
-  { path : 'edicao-produtos/:id', component: EdicaoProdutosComponent }
+  { path : 'cadastro-produtos', component: CadastroProdutosComponent, canActivate: [AuthenticationGuard] },
+  { path : 'consulta-produtos', component: ConsultaProdutosComponent, canActivate: [AuthenticationGuard] },
+  { path : 'edicao-produtos/:id', component: EdicaoProdutosComponent, canActivate: [AuthenticationGuard] }
 ];
 
 

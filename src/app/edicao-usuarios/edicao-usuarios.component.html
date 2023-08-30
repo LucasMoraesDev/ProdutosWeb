@@ -1,35 +1,70 @@
 <div class="m-3">
-    <h5>Atualização de dados Usuário</h5>
-    <p>Preencha os campos para atualizar seus dados.</p>
-    <hr />
- 
-    <form>
-      <div class="row mb-2">
-        <div class="col-md-4">
-          <label>Nome do usuário:</label>
-          <input type="text" class="form-control" />
-        </div>
-        <div class="col-md-4">
-          <label>Senha de acesso:</label>
-          <input type="password" class="form-control" />
-        </div>
-        <div class="col-md-4">
-          <label>Confirme sua senha:</label>
-          <input type="password" class="form-control" />
-        </div>
-      </div>
- 
-      <div class="row mb-2">
-        <div class="col">
-          <input
-            type="submit"
-            class="btn btn-primary"
-            value="Salvar Alterações"
-          />
-        </div>
-      </div>
-    </form>
+  <h5>Atualização de dados Usuário</h5>
+  <p>Preencha os campos para atualizar seus dados.</p>
+  <hr />
+
+
+  <div class="mb-2 text-success">
+    <strong>{{ mensagem_sucesso }}</strong>
   </div>
- 
+
+
+  <div class="mb-2 text-danger">
+    <strong>{{ mensagem_erro }}</strong>
+  </div>
+
+
+  <form [formGroup]="formEdicao" (ngSubmit)="onSubmit()">
+    <div class="row mb-2">
+      <div class="col-md-4">
+        <label>Nome do usuário:</label>
+        <input type="text" class="form-control" formControlName="nome" />
+        <div *ngIf="form.nome.touched && form.nome.invalid" class="text-danger">
+          <div *ngIf="form.nome.errors.required">
+            Por favor, informe o nome.
+          </div>
+          <div *ngIf="form.nome.errors.minlength">
+            Por favor, informe no mínimo 8 caracteres.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label>Senha de acesso:</label>
+        <input type="password" class="form-control" formControlName="senha" />
+        <div
+          *ngIf="form.senha.touched && form.senha.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.senha.errors.pattern">
+            Por favor, informe uma senha com letras maiúsculas, minúsculas,
+            números, símbolos e pelo menos 8 caracteres.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label>Confirme sua senha:</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="senhaConfirmacao"
+        />
+      </div>
+    </div>
+
+
+    <div class="row mb-2">
+      <div class="col">
+        <input
+          type="submit"
+          class="btn btn-primary"
+          value="Salvar Alterações"
+          [disabled]="!formEdicao.valid"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+
+
 
 
